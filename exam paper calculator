@@ -1,0 +1,89 @@
+import cv2
+
+# Load the image
+image = cv2.imread('path_to_image.jpg')
+
+# Resize the image (optional)
+resized_image = cv2.resize(image, (800, 600))
+
+# Convert the image to grayscale
+gray_image = cv2.cvtColor(resized_image, cv2.COLOR_BGR2GRAY)
+
+# Apply Gaussian blur to reduce noise
+blurred_image = cv2.GaussianBlur(gray_image, (5, 5), 0)
+
+# Apply thresholding to create a binary image
+_, thresholded_image = cv2.threshold(blurred_image, 127, 255, cv2.THRESH_BINARY)
+
+# Further image processing steps can be added here
+
+# Display the original and processed images
+cv2.imshow('Original Image', image)
+cv2.imshow('Processed Image', thresholded_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+import cv2
+import pytesseract
+
+# Load the image
+image = cv2.imread('path_to_image.jpg')
+
+# Preprocess the image (optional)
+# ...
+
+# Convert the image to grayscale
+gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+# Apply OCR to the grayscale image
+text = pytesseract.image_to_string(gray_image)
+
+# Print the extracted text
+print(text)
+import re
+
+# Sample extracted text
+text = "Q1: What is the capital of France?\n\na) Paris\nb) London\nc) Berlin\n\nAnswer: a) Paris"
+
+# Extract answers using regular expressions
+answer_options = re.findall(r'\n[a-z]\).*', text, re.IGNORECASE)
+
+# Print the extracted answers
+for option in answer_options:
+    print(option.strip())
+import requests
+
+# List of answer options
+answer_options = ['a) Paris', 'b) London', 'c) Berlin']
+
+# Perform Google search for each answer option
+for option in answer_options:
+    query = "What is the capital of France? " + option
+    response = requests.get('https://www.google.com/search', params={'q': query})
+    
+    # Perform validation based on response
+    # ...
+# List of correct answers
+correct_answers = ['a) Paris', 'c) Berlin']
+
+# Calculate marks based on correct answers
+marks = 0
+for answer in answer_options:
+    if answer in correct_answers:
+        marks += 1
+
+# Print the total marks
+print("Total Marks:", marks)
+import nltk
+
+# Sample answer text
+answer_text = "The capital of france is paris."
+
+# Perform part-of-speech tagging
+tokens = nltk.word_tokenize(answer_text)
+pos_tags = nltk.pos_tag(tokens)
+
+# Perform spelling error checking
+# ...
+
+# Perform grammar error checking
+# ...
